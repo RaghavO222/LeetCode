@@ -8,7 +8,8 @@
 **The Brute Force Way (O(N²))**
 - The most obvious way to solve this is to use two nested loops to check every single pair of numbers to see if they add up to the target. 
 - However, this results in an **O(N²)** time complexity, which is very slow for large arrays.
-
+- **Space Complexity:** O(1), because it doesn't require any extra memory or data structures to store elements while it checks them.
+  
 **The Optimized Way: One-Pass Hash Table (My Solution)**
 - Instead of checking every pair, we can use a little algebra: `current_number + needed_number = target` is the same as `target - current_number = needed_number`.
 - As we iterate through the array, we calculate the `needed_number` (the complement) for the current element.
