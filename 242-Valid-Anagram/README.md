@@ -23,6 +23,10 @@
 - **Unboxing:** The parallel concept to autoboxing. It is the automatic conversion of a wrapper object back into its primitive type (e.g., taking an `Integer` out of a HashMap and treating it as an `int`).
 - *Takeaway:* The array approach is drastically faster because it skips autoboxing and unboxing entirely, manipulating raw primitives in continuous memory.
 
+### Handling Unicode (Follow-up Question)
+- **The Problem:** The `int[26]` array solution only works for the standard English alphabet. Unicode contains over 140,000 characters (including emojis and other languages). An array to accommodate Unicode would have to be massively large, and mostly empty. 
+- **The Solution:** If inputs contain Unicode, we **must use the HashMap approach**. A HashMap is a "sparse" data structure, meaning it only allocates memory for the characters that actually exist in the input string, making it memory-efficient for unpredictable character sets.
+
 ### Complexity
 - **Time Complexity:** O(N) — We iterate through the strings of length N exactly once. Checking the array of size 26 at the end takes O(1) time.
 - **Space Complexity:** O(1) — The array strictly takes 26 spaces, regardless of how massive the input strings are.
