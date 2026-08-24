@@ -77,6 +77,37 @@ class ElectricCar extends Car {
 }
 ```
 
+## 1.5 Encapsulation (Data Hiding)
+
+Encapsulation is the mechanism of bundling the data (variables) and the code acting on the data (methods) together as a single unit. More importantly, it restricts direct access to some of an object's components, which is a defensive programming technique called **data hiding**.
+
+### Key Concepts:
+*   **Access Modifiers:** The tools used to implement encapsulation.
+    *   `private`: The strictest level. The field or method is only accessible within its own class.
+    *   `protected`: Accessible within the same package and by subclasses.
+    *   `public`: Accessible from anywhere.
+*   **Getters and Setters:** Instead of making fields public, you make them `private` and provide `public` methods to read (getter) or modify (setter) the values. This allows the class to control *how* the data is modified (e.g., adding validation logic inside a setter).
+
+### Example from the Notes:
+In the `Vehicle` class, the `year` is encapsulated:
+```java
+class Vehicle {
+    protected String brand; 
+    
+    // The data is hidden from the outside world
+    private int year; 
+
+    public Vehicle(String brand, int year) {
+        this.brand = brand;
+        this.year = year;
+    }
+
+    // Controlled access via a getter method
+    public int getYear() {
+        return year;
+    }
+}
+
 ---
 
 ## 2. Polymorphism & Method Dispatch
