@@ -13,67 +13,26 @@ Welcome to this comprehensive guide on Object-Oriented Programming, focused spec
 ---
 
 ## 1. Classes, Inheritance, and Constructors
+Inheritance represents an **"Is-A"** relationship, allowing subclasses to inherit fields and methods from parent classes, promoting code reuse.
 
-Abstract Classes vs. Interfaces
-
-Both are tools for achieving abstraction in Object-Oriented Programming, but they serve distinctly different architectural purposes.
-
+### Key Concepts:
+*   **`super()` and `this()`**: `super()` is used to call the parent class's constructor, while `this()` references the current instance. Constructor chaining is essential for proper object initialization.
+*   **Access Modifiers**: 
+    *   `private`: Accessible only within the same class.
+    *   `protected`: Accessible within the same package and by subclasses.
+    *   `public`: Accessible from anywhere.
 ---
 
-## 1. Conceptual Notes: The "Why" and "What"
+## 1.5 Encapsulation (Data Hiding)
 
-### Identity vs. Capability
-* **Abstract Class:** Defines an **"is-a"** relationship. It acts as the foundational identity of an object (e.g., a `Goblin` *is an* `Enemy`).
-* **Interface:** Defines a **"can-do"** relationship. It is a behavioral contract applied to an object, regardless of its core identity (e.g., a `Phone` and a `Flashlight` can both be `Chargeable`).
+Encapsulation is the mechanism of bundling the data (variables) and the code acting on the data (methods) together as a single unit. More importantly, it restricts direct access to some of an object's components, which is a defensive programming technique called **data hiding**.
 
-### State and Memory
-* **Abstract Classes:** Can hold **state** (instance variables) and manage an object's memory over time (e.g., tracking current health). Because they have state, they also have **constructors** to initialize that data.
-* **Interfaces:** Cannot hold state. Any variables placed inside an interface are automatically treated as global, unchanging constants (`public static final`). Because there is no state, there are **no constructors**.
-
-### Default Methods in Interfaces
-Modern languages allow interfaces to have "default methods" (methods with actual code inside them).
-* **The Catch:** These default methods still cannot access or change instance variables, because interfaces still cannot hold state. They simply provide a fallback behavior that child classes can use or override.
-
----
-
-## 2. Cheat Sheet: The Rules of Code
-
-### The Keyword Mapping
-* **Class to Class** ➔ `extends` (Inherits identity; limited to ONE)
-* **Class to Interface** ➔ `implements` (Signs a contract; can be MULTIPLE)
-* **Interface to Interface** ➔ `extends` (Stacks contracts; can be MULTIPLE)
-
-### The "Pass the Buck" Rule (Empty Methods)
-* **Concrete Classes:** The buck stops here. They **must** write the code for all empty methods inherited from abstract classes or interfaces.
-* **Abstract Classes:** They act as middlemen. If an abstract class extends another abstract class or implements an interface, it **does not** have to write the code for the empty methods. It passes the responsibility down to its future concrete children.
-
-### The Multiple Inheritance Rules
-* A class can only extend **ONE** abstract class.
-* A class can implement **MULTIPLE** interfaces.
-* An interface can extend **MULTIPLE** interfaces.
-* An interface **CANNOT** extend a class (because that would inherit state).
-
-### How to Handle Collisions
-
-**1. Method Collision (The Diamond Problem)**
-If a class implements two interfaces that have the exact same default method, the compiler throws an error.
-* **The Fix:** You must explicitly override the method in your class. 
-```java
-@Override
-public void sharedMethod() {
-    // Explicitly choose one parent's method to resolve ambiguity
-    InterfaceName.super.sharedMethod(); 
-}
-```
-
-**2. Variable Collision**
-If a class implements two interfaces with the exact same constant variable, the compiler allows it until you try to use it.
-* **The Fix:** You must explicitly state which one you want.
-```java
-// Instead of just printing 'MAX_POWER'
-System.out.println(InterfaceName.MAX_POWER);
-```
-
+### Key Concepts:
+*   **Access Modifiers:** The tools used to implement encapsulation.
+    *   `private`: The strictest level. The field or method is only accessible within its own class.
+    *   `protected`: Accessible within the same package and by subclasses.
+    *   `public`: Accessible from anywhere.
+*   **Getters and Setters:** Instead of making fields public, you make them `private` and provide `public` methods to read (getter) or modify (setter) the values. This allows the class to control *how* the data is modified (e.g., adding validation logic inside a setter).
 
 ### Example: The Vehicle Hierarchy
 ```java
@@ -206,16 +165,60 @@ Parent obj = new Child();
 
 ## 3. Abstraction: Abstract Classes vs. Interfaces
 
-Abstraction hides system complexity and exposes only the essential features to the user.
 
-*   **Abstract Classes (Partial Abstraction):**
-    *   Cannot be instantiated on their own.
-    *   Can contain both abstract methods (no body) and concrete methods (with implementations).
-    *   Can maintain state (instance variables).
-*   **Interfaces (Historically Full Abstraction):**
-    *   Act as a contract that classes must implement.
-    *   Historically, all methods were `public abstract` by default.
-    *   If a non-abstract class implements an interface, it *must* implement all of its methods.
+## 1. Conceptual Notes: The "Why" and "What"
+
+### Identity vs. Capability
+* **Abstract Class:** Defines an **"is-a"** relationship. It acts as the foundational identity of an object (e.g., a `Goblin` *is an* `Enemy`).
+* **Interface:** Defines a **"can-do"** relationship. It is a behavioral contract applied to an object, regardless of its core identity (e.g., a `Phone` and a `Flashlight` can both be `Chargeable`).
+
+### State and Memory
+* **Abstract Classes:** Can hold **state** (instance variables) and manage an object's memory over time (e.g., tracking current health). Because they have state, they also have **constructors** to initialize that data.
+* **Interfaces:** Cannot hold state. Any variables placed inside an interface are automatically treated as global, unchanging constants (`public static final`). Because there is no state, there are **no constructors**.
+
+### Default Methods in Interfaces
+Modern languages allow interfaces to have "default methods" (methods with actual code inside them).
+* **The Catch:** These default methods still cannot access or change instance variables, because interfaces still cannot hold state. They simply provide a fallback behavior that child classes can use or override.
+
+---
+
+## 2. Cheat Sheet: The Rules of Code
+
+### The Keyword Mapping
+* **Class to Class** ➔ `extends` (Inherits identity; limited to ONE)
+* **Class to Interface** ➔ `implements` (Signs a contract; can be MULTIPLE)
+* **Interface to Interface** ➔ `extends` (Stacks contracts; can be MULTIPLE)
+
+### The "Pass the Buck" Rule (Empty Methods)
+* **Concrete Classes:** The buck stops here. They **must** write the code for all empty methods inherited from abstract classes or interfaces.
+* **Abstract Classes:** They act as middlemen. If an abstract class extends another abstract class or implements an interface, it **does not** have to write the code for the empty methods. It passes the responsibility down to its future concrete children.
+
+### The Multiple Inheritance Rules
+* A class can only extend **ONE** abstract class.
+* A class can implement **MULTIPLE** interfaces.
+* An interface can extend **MULTIPLE** interfaces.
+* An interface **CANNOT** extend a class (because that would inherit state).
+
+### How to Handle Collisions
+
+**1. Method Collision (The Diamond Problem)**
+If a class implements two interfaces that have the exact same default method, the compiler throws an error.
+* **The Fix:** You must explicitly override the method in your class. 
+```java
+@Override
+public void sharedMethod() {
+    // Explicitly choose one parent's method to resolve ambiguity
+    InterfaceName.super.sharedMethod(); 
+}
+```
+
+**2. Variable Collision**
+If a class implements two interfaces with the exact same constant variable, the compiler allows it until you try to use it.
+* **The Fix:** You must explicitly state which one you want.
+```java
+// Instead of just printing 'MAX_POWER'
+System.out.println(InterfaceName.MAX_POWER);
+```
 
 ---
 
