@@ -2,6 +2,7 @@
 
 This guide summarizes the core algorithmic patterns identified across the problems in this repository. Recognizing these patterns is the key to solving new, unseen problems without memorizing individual solutions.
 
+
 ---
 
 ## Pattern 1: Basic Hashing (Maps & Sets)
