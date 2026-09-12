@@ -2,6 +2,7 @@
 
 # Core CS Fundamentals: ISA, Processor, and OS Interaction
 
+
 ## 1. Instruction Set Architecture (ISA)
 *   **Definition:** The ISA is the interface between a computer's software and its hardware. It defines the set of basic instructions that a specific CPU natively understands and can execute.
 *   **The "Vocabulary" of the CPU:** Just like human languages have words, a CPU has an ISA. It includes commands for arithmetic, moving data between registers, and logical operations. 
